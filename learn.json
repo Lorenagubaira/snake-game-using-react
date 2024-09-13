@@ -1,18 +1,17 @@
 {
 	"title": {
-		"us": "Code an Excuse Generator Using AI",
-		"es": "Generador de excusas en usando IA"
+		"us": "Logo generator using AI",
+		"es": "Generador de logos usando IA"
 	},
-	"slug": "excuse-generator-using-ai",
+	"slug": "logo-generator-using-ai",
 	"status": "published",
 	"duration": 4,
-	"preview": "https://github.com/breatheco-de/excuse-generator-using-ai/blob/master/preview.gif?raw=true",
 	"translations": ["es", "us"],
-	"difficulty": "beginner",
-	"technologies": ["javascript", "html", "the-dom", "python", "generative-ai"],
+	"difficulty": "intermediate",
+	"technologies": ["javascript", "react", "prompt-engineer", "generative-ai"],
 	"description": {
-		"us": "Create an AI-powered Excuse Generator using Python or JavaScript. Learn to connect with ChatGPT's API and generate creative excuses. Perfect for coding practice!",
-		"es": "Crea un Generador de Excusas con IA usando Python o JavaScript. Aprende a conectar con la API de ChatGPT y genera excusas creativas. ¡Ideal para practicar programación!"
+		"us": "Create a Company Logo Generator using AI. Build a React app using ChatGPT’s API to generate logo descriptions from user input. Enhance your coding skills with this interactive project!",
+		"es": "Crea un Generador de Logotipos de Empresa usando IA. Construye una aplicación React que utiliza la API de ChatGPT para generar descripciones de logotipos desde entradas de usuario. ¡Mejora tus habilidades de programación con este proyecto práctico!"
 	},
 	"autoPlay": false,
 	"projectType": "project"
