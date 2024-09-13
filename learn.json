@@ -6,6 +6,7 @@
 	"slug": "logo-generator-using-ai",
 	"status": "published",
 	"duration": 4,
+	"preview": "https://storage.googleapis.com/screenshots-breathecode/eb7a96488d13a4567089b65dec4afc7292dd100e851045cb8c76ccb69fec9787",
 	"translations": ["es", "us"],
 	"difficulty": "intermediate",
 	"technologies": ["javascript", "react", "prompt-engineer", "generative-ai"],
