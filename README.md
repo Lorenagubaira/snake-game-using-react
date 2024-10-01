@@ -1,12 +1,12 @@
 <!-- hide -->
-# Create a Company Logo Generator using AI
+# Create Your Own Snake Game in React!
 <!-- endhide -->
 
 ## 🌱 How to start this project
 
-Do not clone this repository because we are going to be using a different template.
+Don't clone this repository because we will use a different template.
 
-We recommend opening the `react template` using a provisioning tool like [Codespaces](https://4geeks.com/lesson/what-is-github-codespaces) (recommended) or [Gitpod](https://4geeks.com/lesson/how-to-use-gitpod). Alternatively, you can [clone the GitHub repository](https://4geeks.com/how-to/github-clone-repository) on your local computer using the `git clone` command.
+We recommend opening the `React template` using a provisioning tool like [Codespaces](https://4geeks.com/lesson/what-is-github-codespaces) (recommended) or [Gitpod](https://4geeks.com/lesson/how-to-use-gitpod). Alternatively, you can [clone the GitHub repository](https://4geeks.com/how-to/github-clone-repository) on your local computer using the `git clone` command.
 
 This is the repository you need to open or clone:
 
@@ -14,7 +14,7 @@ This is the repository you need to open or clone:
 https://github.com/4GeeksAcademy/react-hello
 ```
 
-> ⚠ You will need to have Node.js installed if you do it locally, but all of that is already installed on Codespaces or Gitpod.
+> ⚠ You will need to have Node.js installed if you do it locally, but all of that is already installed on Codespaces or Gitpod!
 
 ## 📝 Instructions
 
@@ -24,84 +24,136 @@ https://github.com/4GeeksAcademy/react-hello
   
 - [ ] Follow the instructions in the README of the repository to set up your development environment.
 
-### Step 2: Get Access to ChatGPT's API
+### Step 2: Plan the Game Structure
 
-- [ ] Sign up for an account at [OpenAI](https://www.openai.com/).
-- [ ] Navigate to the API section and obtain your API key for accessing ChatGPT.
+- [ ] Create a sketch or diagram of how your Snake game will look.
 
-### Step 3: Create an Input Form
+  - How will you represent the game board?
+  - How will you manage the state of the snake and the food?
+  - What components will you need?
 
-- [ ] In your React app, create a form where users can provide details about the company:
+### Step 3: Implement the Game Board
 
-   - Company Name
-   - Industry
-   - Preferred Logo Style (e.g., minimalist, vintage, modern)
+- [ ] Create a `Board` component that will represent the area where the snake moves.
 
-### Step 4: Connect to ChatGPT's API
+- [ ] Define the size of the board (e.g., a 20x20 grid).
 
-- [ ] Use the user input to create a prompt for the ChatGPT API.
+- [ ] Use CSS to style the board and the cells.
 
-- [ ] Make a request to the ChatGPT API when the form is submitted.
+### Step 4: Manage State with useState
 
-Example:
+- [ ] Use the `useState` hook to manage:
 
-```js
-const handleGenerateLogo = async ({ companyName, industry, style }) => {
- const prompt = `Create a detailed description of a logo for a company named "${companyName}", operating in the "${industry}" industry. The logo should have a "${style}" style.`;
+  - The position of the snake (an array of coordinates).
+  - The current direction of movement.
+  - The position of the food.
+  - The game state (running, game over).
 
- try {
-   const response = await fetch('https://api.openai.com/v1/engines/text-davinci-003/completions', {
-     method: 'POST',
-     headers: {
-       'Authorization': `Bearer YOUR_OPENAI_API_KEY`,
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({
-       prompt: prompt,
-       max_tokens: 150,
-       n: 1,
-       stop: null,
-       temperature: 0.7,
-     }),
-   });
-
-   const data = await response.json();
-   const description = data.choices[0].text.trim();
-   setLogoDescription(description);
- } catch (error) {
-   console.error('Error generating logo description:', error);
- }
-};
+```jsx
+const [snake, setSnake] = useState([[10, 10]]);
+const [direction, setDirection] = useState('RIGHT');
+const [food, setFood] = useState([15, 15]);
+const [gameOver, setGameOver] = useState(false);
 ```
 
-> **Note:** Remember to replace `'YOUR_OPENAI_API_KEY'` with your actual OpenAI API key.
+### Step 5: Handle Snake Movement
 
-### Step 5: Display the Generated Logo Description
+- [ ] Use the `useEffect` hook to create a game loop that updates the snake's position at regular intervals.
 
-- [ ] Display the logo description returned from the API to the user in your React app.
+- [ ] Calculate the new head of the snake based on the current direction.
 
-- [ ] Ensure the description is presented in a readable format, possibly with styling to enhance user experience.
+- [ ] Check for collisions with walls or with the snake itself.
 
-### Step 6: Bonus - Visual Representation
+```jsx
+useEffect(() => {
+  const moveSnake = () => {
+    // Logic to move the snake
+  };
 
-- [ ] Try to add a feature where you visually generate a simple logo based on the description provided by ChatGPT. You can use libraries like [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API), [Fabric.js](http://fabricjs.com/), or [Konva.js](https://konvajs.org/) to create basic visual designs.
+  if (!gameOver) {
+    const interval = setInterval(moveSnake, 200);
+    return () => clearInterval(interval);
+  }
+}, [snake, direction, gameOver]);
+```
 
-- [ ] Alternatively, you can integrate with an AI image generation API like [DALL·E](https://openai.com/dall-e-2/) to create an image based on the description.
+### Step 6: Key Controls to Change Direction
 
-### Bonus Section
+- [ ] Add an event listener for arrow keys and update the snake's direction accordingly.
 
-#### Additional Features to Practice and Improve the Project
+```jsx
+useEffect(() => {
+  const handleKeyDown = (event) => {
+    switch(event.key) {
+      case 'ArrowUp':
+        setDirection('UP');
+        break;
+      case 'ArrowDown':
+        setDirection('DOWN');
+        break;
+      case 'ArrowLeft':
+        setDirection('LEFT');
+        break;
+      case 'ArrowRight':
+        setDirection('RIGHT');
+        break;
+      default:
+        break;
+    }
+  };
 
-1. **Logo Variations:** Allow users to generate multiple logo descriptions with different styles or themes by modifying the prompt.
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+}, []);
+```
 
-2. **Styling:** Enhance your app's appearance using CSS or styling libraries like [Bootstrap](https://getbootstrap.com/) or [Material-UI](https://material-ui.com/).
+### Step 7: Implement Food Logic
 
-3. **Save Descriptions:** Implement functionality to save or download the generated logo descriptions for future reference.
+- [ ] When the snake eats the food:
 
-4. **User Accounts:** Add a user authentication system so users can save their logo ideas and access them later.
+  - Increase the length of the snake.
+  - Generate a new random position for the food.
 
-5. **Error Handling:** Add robust error handling to manage API errors, network issues, or invalid inputs gracefully.
+- [ ] Ensure that the food does not appear on a position occupied by the snake.
 
-6. **Responsive Design:** Ensure your app looks good on various screen sizes by implementing responsive design practices.
+### Step 8: Handle Game Over
 
-Explore different enhancements to make your logo generator app more interactive and visually appealing!
+- [ ] Determine when the game is over (collision with walls or itself).
+
+- [ ] Display a "Game Over!" message and offer an option to restart the game.
+
+```jsx
+if (checkCollision(newHead)) {
+  setGameOver(true);
+}
+```
+
+### Step 9: Improve the User Interface
+
+- [ ] Add visual elements such as:
+
+  - Current score (based on the snake's length or number of food items consumed).
+  - Button to restart the game.
+  - Visual indicators for the food and the snake.
+
+- [ ] Ensure the game is responsive and looks good on different devices.
+
+## Bonus Section
+
+### Additional Features to Practice and Improve the Project
+
+1. **Speed Adjustment:** Increase the snake's speed as the player progresses.
+
+2. **Difficulty Levels:** Offer different difficulty levels with varying speeds or board sizes.
+
+3. **Obstacles:** Add obstacles to the board that the snake must avoid.
+
+4. **Sounds and Effects:** Add sound effects when eating food or when the game ends!
+
+5. **High Scores:** Implement a system to save and display high scores using local storage.
+
+6. **Customizable Themes:** Allow the player to choose between different visual themes for the game.
+
+7. **Multiplayer Game:** Implement a mode where two snakes compete on the same board.
+
+Explore different enhancements to make your Snake game more interesting and challenging!
