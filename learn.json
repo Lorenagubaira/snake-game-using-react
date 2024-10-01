@@ -11,8 +11,8 @@
   "difficulty": "intermediate",
   "technologies": ["javascript", "react"],
   "description": {
-    "us": "Create your own Snake game in React! Develop the classic Snake game where you control a snake to eat food and grow longer while avoiding collisions. Learn how to manage game state, implement movement and collision logic, and handle user input in React. Enhance your skills with this engaging project!",
-    "es": "¡Crea tu propio juego de Snake en React! Desarrolla el juego clásico de Snake donde controlas una serpiente para comer y crecer, evitando colisiones. Aprende a manejar el estado del juego, implementar la lógica de movimiento y colisión, y manejar la entrada del usuario en React. ¡Mejora tus habilidades con este emocionante proyecto!"
+    "us": "Create your own Snake game in React! Develop the classic game where you control a snake to eat food and grow longer while avoiding collisions. Learn to manage game state, implement movement logic, and handle user input in React.",
+    "es": "¡Crea tu propio juego de Snake en React! Desarrolla el juego clásico donde controlas una serpiente para comer y crecer, evitando colisiones. Aprende a manejar el estado del juego, implementar la lógica de movimiento y manejar la entrada del usuario en React."
   },
   "autoPlay": false,
   "projectType": "project"
