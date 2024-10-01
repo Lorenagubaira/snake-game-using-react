@@ -1,5 +1,5 @@
 <!-- hide -->
-# Crear un Generador de Logos de Empresa usando IA
+# ¡Crea tu Propio Juego de Snake en React!
 <!-- endhide -->
 
 ## 🌱 ¿Cómo iniciar este proyecto?
@@ -14,7 +14,7 @@ Este es el repositorio que necesitas abrir o clonar:
 https://github.com/4GeeksAcademy/react-hello
 ```
 
-> ⚠ Necesitarás tener Node.js instalado si lo haces localmente, pero todo eso ya está instalado en Codespaces o Gitpod.
+> ⚠ ¡Necesitarás tener Node.js instalado si lo haces localmente, pero todo eso ya está instalado en Codespaces o Gitpod!
 
 ## 📝 Instrucciones
 
@@ -24,84 +24,136 @@ https://github.com/4GeeksAcademy/react-hello
   
 - [ ] Sigue las instrucciones en el README del repositorio para configurar tu entorno de desarrollo.
 
-### Paso 2: Obtén acceso a la API de ChatGPT
+### Paso 2: Planifica la Estructura del Juego
 
-- [ ] Regístrate para obtener una cuenta en [OpenAI](https://www.openai.com/).
-- [ ] Navega a la sección de API y obtén tu clave API para acceder a ChatGPT.
+- [ ] Crea un boceto o diagrama de cómo será tu juego de Snake.
 
-### Paso 3: Crea un Formulario de Entrada
+  - ¿Cómo representarás el tablero de juego?
+  - ¿Cómo manejarás el estado de la serpiente y la comida?
+  - ¿Qué componentes necesitarás?
 
-- [ ] En tu aplicación React, crea un formulario donde los usuarios puedan proporcionar detalles sobre la empresa:
+### Paso 3: Implementa el Tablero de Juego
 
-   - Nombre de la empresa
-   - Industria
-   - Estilo de logotipo preferido (por ejemplo, minimalista, vintage, moderno)
+- [ ] Crea un componente `Board` que representará el área donde se moverá la serpiente.
 
-### Paso 4: Conecta a la API de ChatGPT
+- [ ] Define el tamaño del tablero (por ejemplo, una cuadrícula de 20x20).
 
-- [ ] Utiliza la entrada del usuario para crear un prompt para la API de ChatGPT.
+- [ ] Usa CSS para estilizar el tablero y las celdas.
 
-- [ ] Realiza una solicitud a la API de ChatGPT cuando se envíe el formulario.
+### Paso 4: Maneja el Estado con useState
 
-Ejemplo:
+- [ ] Utiliza el hook `useState` para manejar:
 
-```js
-const handleGenerateLogo = async ({ companyName, industry, style }) => {
-  const prompt = `Crea una descripción detallada de un logotipo para una empresa llamada "${companyName}", que opera en la industria de "${industry}". El logotipo debería tener un estilo "${style}".`;
+  - La posición de la serpiente (un array de coordenadas).
+  - La dirección actual de movimiento.
+  - La posición de la comida.
+  - El estado del juego (en curso, finalizado).
 
-  try {
-    const response = await fetch('https://api.openai.com/v1/engines/text-davinci-003/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer TU_CLAVE_API_DE_OPENAI`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        prompt: prompt,
-        max_tokens: 150,
-        n: 1,
-        stop: null,
-        temperature: 0.7,
-      }),
-    });
-
-    const data = await response.json();
-    const description = data.choices[0].text.trim();
-    setLogoDescription(description);
-  } catch (error) {
-    console.error('Error al generar la descripción del logotipo:', error);
-  }
-};
+```jsx
+const [snake, setSnake] = useState([[10, 10]]);
+const [direction, setDirection] = useState('RIGHT');
+const [food, setFood] = useState([15, 15]);
+const [gameOver, setGameOver] = useState(false);
 ```
 
-> **Nota:** Recuerda reemplazar `'TU_CLAVE_API_DE_OPENAI'` con tu clave API real de OpenAI.
+### Paso 5: Maneja el Movimiento de la Serpiente
 
-### Paso 5: Muestra la Descripción del Logotipo Generado
+- [ ] Usa el hook `useEffect` para crear un bucle de juego que actualice la posición de la serpiente en intervalos regulares.
 
-- [ ] Muestra la descripción del logotipo devuelta por la API al usuario en tu aplicación React.
+- [ ] Calcula la nueva cabeza de la serpiente basándote en la dirección actual.
 
-- [ ] Asegúrate de que la descripción se presente en un formato legible, posiblemente con estilos para mejorar la experiencia del usuario.
+- [ ] Verifica las colisiones con las paredes o con la propia serpiente.
 
-### Paso 6: Bonus - Representación Visual
+```jsx
+useEffect(() => {
+  const moveSnake = () => {
+    // Lógica para mover la serpiente
+  };
 
-- [ ] Intenta agregar una función donde generes visualmente un logotipo simple basado en la descripción proporcionada por ChatGPT. Puedes usar librerías como [Canvas API](https://developer.mozilla.org/es/docs/Web/API/Canvas_API), [Fabric.js](http://fabricjs.com/), o [Konva.js](https://konvajs.org/) para crear diseños visuales básicos.
+  if (!gameOver) {
+    const interval = setInterval(moveSnake, 200);
+    return () => clearInterval(interval);
+  }
+}, [snake, direction, gameOver]);
+```
 
-- [ ] Alternativamente, puedes integrar una API de generación de imágenes con IA como [DALL·E](https://openai.com/dall-e-2/) para crear una imagen basada en la descripción.
+### Paso 6: Control de Teclas para Cambiar de Dirección
 
-### Sección de Bonus
+- [ ] Agrega un event listener para las teclas de flecha y actualiza la dirección de la serpiente en consecuencia.
 
-#### Características Adicionales para Practicar y Mejorar el Proyecto
+```jsx
+useEffect(() => {
+  const handleKeyDown = (event) => {
+    switch(event.key) {
+      case 'ArrowUp':
+        setDirection('UP');
+        break;
+      case 'ArrowDown':
+        setDirection('DOWN');
+        break;
+      case 'ArrowLeft':
+        setDirection('LEFT');
+        break;
+      case 'ArrowRight':
+        setDirection('RIGHT');
+        break;
+      default:
+        break;
+    }
+  };
 
-1. **Variaciones de Logotipo:** Permite a los usuarios generar múltiples descripciones de logotipos con diferentes estilos o temas modificando el prompt.
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+}, []);
+```
 
-2. **Estilización:** Mejora la apariencia de tu aplicación usando CSS o librerías de estilos como [Bootstrap](https://getbootstrap.com/) o [Material-UI](https://material-ui.com/).
+### Paso 7: Implementa la Lógica de la Comida
 
-3. **Guardar Descripciones:** Implementa funcionalidad para guardar o descargar las descripciones de logotipos generadas para referencia futura.
+- [ ] Cuando la serpiente coma la comida:
 
-4. **Cuentas de Usuario:** Agrega un sistema de autenticación para que los usuarios puedan guardar sus ideas de logotipos y acceder a ellas más tarde.
+  - Incrementa la longitud de la serpiente.
+  - Genera una nueva posición aleatoria para la comida.
 
-5. **Manejo de Errores:** Agrega un manejo de errores robusto para gestionar errores de API, problemas de red o entradas inválidas de manera adecuada.
+- [ ] Asegúrate de que la comida no aparezca en una posición ocupada por la serpiente.
 
-6. **Diseño Responsivo:** Asegúrate de que tu aplicación se vea bien en varios tamaños de pantalla implementando prácticas de diseño responsivo.
+### Paso 8: Maneja el Fin del Juego
 
-¡Explora diferentes mejoras para hacer tu aplicación generadora de logotipos más interactiva y visualmente atractiva!
+- [ ] Determina cuándo el juego ha terminado (colisión con paredes o consigo misma).
+
+- [ ] Muestra un mensaje de "¡Juego Terminado!" y ofrece la opción de reiniciar el juego.
+
+```jsx
+if (checkCollision(newHead)) {
+  setGameOver(true);
+}
+```
+
+### Paso 9: Mejora la Interfaz de Usuario
+
+- [ ] Agrega elementos visuales como:
+
+  - Puntuación actual (basada en la longitud de la serpiente o cantidad de comida consumida).
+  - Botón para reiniciar el juego.
+  - Indicadores visuales para la comida y la serpiente.
+
+- [ ] Asegúrate de que el juego sea responsivo y se vea bien en diferentes dispositivos.
+
+## Sección de Bonus
+
+### Características Adicionales para Practicar y Mejorar el Proyecto
+
+1. **Ajuste de Velocidad:** Incrementa la velocidad de la serpiente a medida que el jugador avanza.
+
+2. **Niveles de Dificultad:** Ofrece diferentes niveles de dificultad con velocidades o tamaños de tablero variados.
+
+3. **Obstáculos:** Agrega obstáculos al tablero que la serpiente debe evitar.
+
+4. **Sonidos y Efectos:** ¡Añade efectos de sonido al comer la comida o al finalizar el juego!
+
+5. **Puntuaciones Altas:** Implementa un sistema para guardar y mostrar las puntuaciones más altas usando el almacenamiento local.
+
+6. **Temas Personalizables:** Permite al jugador elegir entre diferentes temas visuales para el juego.
+
+7. **Juego Multijugador:** Implementa un modo de juego donde dos serpientes compiten en el mismo tablero.
+
+¡Explora diferentes mejoras para hacer tu juego de Snake más interesante y desafiante!
