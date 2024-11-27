@@ -2,7 +2,7 @@
 # ¡Crea tu Propio Juego de Snake en React!
 <!-- endhide -->
 
-<onlyfor saas="true" withBanner="false">
+<onlyfor saas="false" withBanner="false">
 ## 🌱 ¿Cómo iniciar este proyecto?
 
 No clones este repositorio porque vamos a utilizar una plantilla diferente.
