@@ -2,7 +2,7 @@
 # Create Your Own Snake Game in React!
 <!-- endhide -->
 
-<onlyfor saas="true" withBanner="false">
+<onlyfor saas="false" withBanner="false">
 
 ## 🌱 How to start this project
 
