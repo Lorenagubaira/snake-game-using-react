@@ -2,7 +2,7 @@
 # ¡Crea tu Propio Juego de Snake en React!
 <!-- endhide -->
 
-<onlyfor saas="false" withBanner="false">
+<how-to-start>
 ## 🌱 ¿Cómo iniciar este proyecto?
 
 No clones este repositorio porque vamos a utilizar una plantilla diferente.
@@ -17,7 +17,7 @@ https://github.com/4GeeksAcademy/react-hello
 
 > ⚠ ¡Necesitarás tener Node.js instalado si lo haces localmente, pero todo eso ya está instalado en Codespaces o Gitpod!
 
-</onlyfor>
+</how-to-start>
 
 ## 📝 Instrucciones
 
